@@ -3,3 +3,15 @@
   margin: 0;
   padding: 0;
 }
+
+:root {
+  /* Couleurs */
+  --Primary: #906427;
+  --Secondary: #B6AC97;
+  --Dark: #392c1e;
+  --BgDark: #292222;
+  /* Typo */
+  --Headline: 'Rockwell', cursive;
+  --Text: 'Montserrat', sans-serif;
+
+}

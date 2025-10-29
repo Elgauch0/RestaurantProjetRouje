@@ -11,7 +11,7 @@ import "./bootstrap.js";
 
 switch (window.location.pathname) {
   case "/":
-    import('./styles/_partials/presentation.css');
+    import('./styles/Pages/homePage.css');
     break;
 //   case "/contact":
 //     import('./styles/_partials/contact.css');

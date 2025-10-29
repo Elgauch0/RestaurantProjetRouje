@@ -1,0 +1,93 @@
+/* ---------------------------------------------------------------------First Présentation Block --------------------------------------------*/
+
+.presentation {
+
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5),
+      /* voile noir à 50% */
+      rgba(0, 0, 0, 0.5)),
+    url('../../images/Présentation.jpg');
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  color: var(--ColorText);
+  min-height: 40vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  flex-direction: column;
+}
+
+
+.presentation h1 span {
+  display: block;
+  font-size: 3rem;
+  font-weight: 700;
+}
+
+
+/* ---------------------------------------------------------------------Second Bienvenue  Block --------------------------------------------*/
+
+.presentationComponant {
+  text-align: center;
+  padding: 1rem;
+}
+
+.presentationComponant figure {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin: 1rem;
+
+}
+
+.presentationComponant figure img {
+  width: 30vh;
+  border-radius: 5px;
+}
+
+.presentationComponant figure figcaption {
+  text-align: center;
+  width: 30vh;
+}
+
+
+
+
+
+/* ---------------------------------------------------------------------Produits Frais  Block --------------------------------------------*/
+
+
+
+
+
+.presentationDark {
+  text-align: center;
+  background-color: var(--BgDark);
+  padding: 1rem;
+}
+
+.presentationDark figure {
+  display: flex;
+  justify-content: space-around;
+  flex-direction: row-reverse;
+  align-items: center;
+  margin: 1rem;
+
+
+
+
+}
+
+.presentationDark figure img {
+  width: 30vh;
+  border-radius: 5px;
+
+}
+
+.presentationDark figure figcaption {
+  text-align: center;
+  width: 30vh;
+  color: var(--ColorText);
+}

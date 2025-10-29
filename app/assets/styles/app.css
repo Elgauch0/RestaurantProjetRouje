@@ -11,7 +11,40 @@
   --Dark: #392c1e;
   --BgDark: #292222;
   /* Typo */
-  --Headline: 'Rockwell', cursive;
+  --Headline: "Kelly Slab", 'consolas', cursive;
   --Text: 'Montserrat', sans-serif;
+  --ColorText: #FFFFFF
+}
 
+button {
+  background-color: var(--Primary);
+  color: var(--ColorText);
+  padding: 0.1rem 0.5rem;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 1rem;
+
+}
+
+button:hover {
+  background-color: var(--Dark);
+  color: var(--ColorText);
+
+}
+
+h1,
+h2 {
+  font-weight: 400;
+  text-align: center;
+  font-family: var(--Headline);
+
+}
+
+h1 {
+  font-size: 2rem;
+}
+
+h2 {
+  font-size: 1.3rem;
+  color: var(--Primary);
 }

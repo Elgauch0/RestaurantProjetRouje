@@ -1,3 +1,16 @@
-<section class="presentation">
-	<img src="{{asset('images/Présentation.jpg')}}" alt="image du restaurant">
-</section>
+{% if app.request.attributes.get('_route') == 'app_home' %}
+	<section class="presentation">
+		<h1>Le Chef Bernard Arnaud vous invite au
+			<span>Quai Antique</span>
+		</h1>
+		<button>Réserver</button>
+	</section>
+
+{% elseif app.request.attributes.get('_route') == 'gallerie' %}
+	<section class="presentation">
+		<h1>Galerie du
+			<span>Quai Antique</span>
+		</h1>
+		<button>Ajouter une Photo</button>
+	</section>
+{% endif %}

@@ -12,6 +12,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Routing\Requirement\Requirement;
 
+#[Route('/dish')]
 final class DishController extends AbstractController
 {
 
@@ -23,7 +24,7 @@ final class DishController extends AbstractController
 
 
 
-    #[Route('/dish', name: 'dish_home', methods: ['GET'])]
+    #[Route('/', name: 'dish_home', methods: ['GET'])]
     public function index(): Response
     {
         $dishes = $this->repository->findAll();
@@ -34,15 +35,38 @@ final class DishController extends AbstractController
 
 
 
-    #[Route('/dish/{id}', name: 'dish_show', methods: ['GET'], requirements: ['id' => Requirement::POSITIVE_INT])]
+    #[Route('/{id}', name: 'dish_show', methods: ['GET'], requirements: ['id' => Requirement::POSITIVE_INT])]
     public function show(Dish $dish): Response
     {
-
-
         if (!$dish) {
             throw $this->createNotFoundException('Plat non trouvé');
         }
         return $this->render('dish/show.html.twig', [
+            'dish' => $dish,
+        ]);
+    }
+
+
+    #[Route('/edit/{id}', name: 'dish_edit', methods: ['GET', 'PATCH'], requirements: ['id' => Requirement::POSITIVE_INT])]
+    public function edit(Dish $dish, Request $request): Response
+    {
+        if (!$dish) {
+            throw $this->createNotFoundException('Plat non trouvé');
+        }
+
+        $form = $this->createForm(DishType::class, $dish, [
+            'method' => 'PATCH',
+        ]);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->em->flush();
+            $this->addFlash('success', 'Plat modifié!');
+            return $this->redirectToRoute('dish_home');
+        }
+
+        return $this->render('dish/edit.html.twig', [
+            'form' => $form,
             'dish' => $dish,
         ]);
     }
@@ -54,7 +78,7 @@ final class DishController extends AbstractController
 
 
 
-    #[Route('/dish/add', name: 'dish_add', methods: ['GET', 'POST'])]
+    #[Route('/add', name: 'dish_add', methods: ['GET', 'POST'])]
     public function add(Request $request): Response
     {
 
@@ -65,7 +89,7 @@ final class DishController extends AbstractController
             $this->em->persist($dish);
             $this->em->flush();
             $this->addFlash('success', 'Plat Ajouté!');
-            return $this->redirectToRoute('dish_add');
+            return $this->redirectToRoute('dish_home');
         }
 
 
@@ -73,5 +97,20 @@ final class DishController extends AbstractController
         return $this->render('dish/add.html.twig', [
             'form' => $form,
         ]);
+    }
+
+
+    #[Route('/{id}', name: 'dish_delete', methods: ['DELETE'], requirements: ['id' => Requirement::POSITIVE_INT])]
+    public function delete(Dish $dish): Response
+    {
+        if (!$dish) {
+            throw $this->createNotFoundException('Plat non trouvé');
+        }
+        $this->em->remove($dish);
+        $this->em->flush();
+        $this->addFlash('success', 'Plat supprimé!');
+
+
+        return $this->redirectToRoute('dish_home');
     }
 }

@@ -10,7 +10,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-
+use Vich\UploaderBundle\Form\Type\VichImageType;
 
 class DishType extends AbstractType
 {
@@ -28,6 +28,12 @@ class DishType extends AbstractType
                 'class' => Category::class,
                 'choice_label' => 'title',
                 'label' => 'Catégorie',
+            ])
+            ->add('imageFile', VichImageType::class, [
+                'label' => 'Image du plat',
+                'required' => false,
+                'mapped' => false,
+
             ])
             ->add('save', SubmitType::class, [
                 'label' => 'Créeer'

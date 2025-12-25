@@ -92,4 +92,39 @@ class RestaurantSettings
 
         return $this;
     }
+
+    ####################################################
+
+    public function isDayOpen(\DateTimeImmutable $datetime): bool
+    {
+        $dayOfweek = '1';     //lundi est fermé
+        return $datetime->format('N') != $dayOfweek;
+    }
+
+
+    public function isServiceOpen(\DateTimeImmutable $datetime): bool
+    {
+        $hour = $datetime->format('H:i');
+
+        $isLunch = $hour >= $this->getLunchStart()->format('H:i') && $hour < $this->getLunchEnd()->format('H:i');
+        $isDinner = $hour >= $this->getDinnerStart()->format('H:i') && $hour < $this->getDinnerEnd()->format('H:i');
+
+        return $isLunch || $isDinner;
+    }
+
+    public function getServiceInterval(\DateTimeImmutable $datetime): array
+    {
+        $hour = $datetime->format('H:i');
+
+        // On détermine juste quel créneau utiliser sans refaire la validation
+        $isLunch = ($hour >= $this->getLunchStart()->format('H:i') && $hour < $this->getLunchEnd()->format('H:i'));
+
+        $startRef = $isLunch ? $this->getLunchStart() : $this->getDinnerStart();
+        $endRef   = $isLunch ? $this->getLunchEnd() : $this->getDinnerEnd();
+
+        return [
+            'start' => $datetime->setTime((int)$startRef->format('H'), (int)$startRef->format('i'), 0),
+            'end'   => $datetime->setTime((int)$endRef->format('H'), (int)$endRef->format('i'), 0)
+        ];
+    }
 }

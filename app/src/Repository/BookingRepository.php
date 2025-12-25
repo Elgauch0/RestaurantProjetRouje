@@ -16,6 +16,26 @@ class BookingRepository extends ServiceEntityRepository
         parent::__construct($registry, Booking::class);
     }
 
+
+
+
+    public function getCountConvivesByInterval(\DateTimeImmutable $start, \DateTimeImmutable $end): int
+    {
+        $qb = $this->createQueryBuilder('b');
+        $qb->select('SUM(b.guest_count) as totalConvives')
+            ->where('b.datetime >= :start')
+            ->andWhere('b.datetime < :end')
+            ->setParameter('start', $start)
+            ->setParameter('end', $end);
+
+        $result = $qb->getQuery()->getSingleScalarResult();
+
+        return (int) ($result ?? 0);
+    }
+
+
+
+
     //    /**
     //     * @return Booking[] Returns an array of Booking objects
     //     */

@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Réservation
+{% endblock %}
+{% block stylesheets %}
+	{{ parent() }}
+	<link rel="stylesheet" href="{{ asset('styles/dish/add.css')}}">
+{% endblock %}
+
+{% block body %}
+	{% include "_partials/flashes.html.twig" %}
+	<fieldset class="form-group">
+		<legend class="legendForm">Make a Reservation</legend>
+		{{form(bookingForm)}}
+		</fieldset>
+	{% endblock %}

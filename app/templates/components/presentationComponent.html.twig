@@ -7,5 +7,11 @@
 			{{ highlight }}
 		</figcaption>
 	</figure>
-	<button>{{ textbtn }}</button>
+	{% if textbtn == 'Réservez ici.' %}
+
+
+		<a href="{{ path('app_reservation') }}" class="btn">{{ textbtn }}</a>
+	{% else %}
+		<button>{{ textbtn }}</button>
+	{% endif %}
 </section>

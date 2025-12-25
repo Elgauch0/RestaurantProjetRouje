@@ -3,7 +3,7 @@
 		<h1>Le Chef Bernard Arnaud vous invite au
 			<span>Quai Antique</span>
 		</h1>
-		<button>Réserver</button>
+		<a href="{{ path('app_reservation') }}" class="btn">Réserver</a>
 	</section>
 
 {% elseif app.request.attributes.get('_route') == 'gallerie' %}
@@ -11,6 +11,6 @@
 		<h1>Galerie du
 			<span>Quai Antique</span>
 		</h1>
-		<button>Ajouter une Photo</button>
+		<a href="{{ path('app_reservation') }}" class="btn">Notre Galerie</a>
 	</section>
 {% endif %}

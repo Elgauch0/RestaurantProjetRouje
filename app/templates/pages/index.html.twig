@@ -4,9 +4,11 @@
 
 {% block body %}
 
-
+	{% include "_partials/flashes.html.twig" %}
 	{# Présentation  Bloc.twig #}
+
 	{% include "_partials/presentation.html.twig"%}
+
 
 	{# Bienvenue Bloc.twig #}
 	{% include 'components/presentationComponent.html.twig' with {

@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mon profil
+{% endblock %}
+{% block stylesheets %}
+	{{ parent() }}
+	<link rel="stylesheet" href="{{ asset('styles/profil/index.css')}}">
+{% endblock %}
+{% block body %}
+	{% include "_partials/flashes.html.twig" %}
+	<div class="profile-container">
+
+		<div class="profile-card">
+			<h1 class="profile-title">Bienvenue,
+				<span>{{ user.name }}</span>
+				! ✅</h1>
+
+			<div class="profile-section">
+				<label>Email</label>
+				<p class="profile-data">{{ user.email }}</p>
+			</div>
+
+			<div class="profile-section">
+				<label>Mes allergies</label>
+				{% if user.allergies is empty %}
+					<p class="profile-data empty">Vous n'avez pas renseigné d'allergies.</p>
+				{% else %}
+					<p class="profile-data highlight">{{ user.allergies }}</p>
+				{% endif %}
+			</div>
+
+			<div class="profile-section">
+				<label>Réservation par défaut</label>
+				<p class="profile-data">
+					<span class="badge">{{ user.guestCount }}</span>
+					invités par défaut
+				</p>
+			</div>
+
+			<div class="profile-actions">
+				<a href="{{ path('app_profil_edit') }}" class="btn-edit">Modifier mon profil</a>
+				<form method="post" action="{{ path('app_profil_delete') }}" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer votre profil ? Cette action est irréversible.');">
+					<input type="hidden" name="_token" value="{{ csrf_token('delete-profile' ~ user.id) }}">
+					<input type="hidden" name="_method" value="DELETE">
+					<button type="submit" class="btn-delete">Supprimer mon profil</button>
+				</form>
+			</div>
+		</div>
+	</div>
+{% endblock %}

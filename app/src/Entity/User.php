@@ -38,7 +38,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?string $password = null;
 
     #[ORM\Column(type: Types::SMALLINT)]
-    private ?int $guest_count = null;
+    private ?int $guestCount = null;
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $allergies = null;
@@ -140,12 +140,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function getGuestCount(): ?int
     {
-        return $this->guest_count;
+        return $this->guestCount;
     }
 
-    public function setGuestCount(int $guest_count): static
+    public function setGuestCount(int $guestCount): static
     {
-        $this->guest_count = $guest_count;
+        $this->guestCount = $guestCount;
 
         return $this;
     }

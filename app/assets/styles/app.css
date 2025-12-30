@@ -16,20 +16,30 @@
   --ColorText: #FFFFFF
 }
 
+
+.btn,
 button {
+  display: inline-block;
+  /* INDISPENSABLE pour que le lien réagisse comme un bouton */
   background-color: var(--Primary);
   color: var(--ColorText);
   padding: 0.1rem 0.5rem;
   border-radius: 5px;
   cursor: pointer;
   margin: 1rem;
-
+  text-decoration: none;
+  /* Enlève le trait sous le lien */
+  border: none;
+  /* Enlève la bordure par défaut des boutons */
+  font-family: inherit;
+  /* Pour que le bouton utilise la même police que le reste */
 }
 
+/* Le hover pour les deux */
+.btn:hover,
 button:hover {
   background-color: var(--Dark);
   color: var(--ColorText);
-
 }
 
 h1,
